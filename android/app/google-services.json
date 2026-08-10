@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "405081086950",
+    "project_id": "neo-app-dff1d",
+    "storage_bucket": "neo-app-dff1d.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:405081086950:android:7387627494085c5b879427",
+        "android_client_info": {
+          "package_name": "com.neovote.neovote"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "405081086950-3lbv0ekks9ft0dbhvfbbg9596e9v9a2c.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.neovote.neovote",
+            "certificate_hash": "4e6423f88c62fca6a0290e5d699df314989b1a44"
+          }
+        },
+        {
+          "client_id": "405081086950-2fefn9ck71ji4q4iui6r2rji02482056.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDAyqWvI5-YmfpB9F7Glh9tC5BbFBIs5-A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "405081086950-2fefn9ck71ji4q4iui6r2rji02482056.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "405081086950-4lkl9iue9ututv8mo5oef6stnj0rsht5.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.neovote.neovote"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
