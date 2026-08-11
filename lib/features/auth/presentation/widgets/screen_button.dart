@@ -22,11 +22,12 @@ Widget build(BuildContext context){
           );
     },
   child: Container(
-    padding: const EdgeInsets.all(30.0),
+    width: double.infinity,
+    padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 16.0),
     decoration: BoxDecoration(
       color: color!,
       borderRadius: const BorderRadius.only(
-        topLeft: Radius.circular(50),
+        topLeft: Radius.circular(40),
       ),
     ),
     child: Text(

@@ -171,15 +171,15 @@ class _LoginPageState extends State<LoginPage> {
           const Expanded(
             flex: 1,
             child: SizedBox(
-              height: 15,
+              height: 10,
             ),
           ),
           Expanded(
-            flex: 7,
+            flex: 8,
             child: Container(
-              padding: const EdgeInsets.fromLTRB(25.0, 40.0, 25.0, 20.0),
+              padding: const EdgeInsets.fromLTRB(25.0, 25.0, 25.0, 15.0),
               decoration: const BoxDecoration(
-                color: Colors.blueGrey,
+                color: Colors.white,
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(40.0),
                   topRight: Radius.circular(40.0),
@@ -195,13 +195,13 @@ class _LoginPageState extends State<LoginPage> {
                   'Log in to Vote',
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    fontSize: 28.0,
+                    fontSize: 26.0,
                     fontWeight:FontWeight.w900,
                     color: lightColorScheme.primary,
                     ),
                 ),
                 const SizedBox(
-                  height: 30.0
+                  height: 20.0
                   ),
 
                 TextFormField(
@@ -235,7 +235,7 @@ class _LoginPageState extends State<LoginPage> {
                 ),
 
                 const SizedBox(
-                  height: 20.0,
+                  height: 15.0,
                   ),
                 TextFormField(
                   controller: _passwordController,
@@ -267,7 +267,7 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ),
                 ),
-                const SizedBox(height: 15.0),
+                const SizedBox(height: 12.0),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -311,13 +311,13 @@ class _LoginPageState extends State<LoginPage> {
               ), 
 
               const SizedBox(
-                height: 20.0,
+                height: 15.0,
               ),
               ElevatedButton(
                 onPressed: _signInWithEmail,
                  child: const Text('Login'),
                  ),
-              const SizedBox(height: 25.0),   
+              const SizedBox(height: 18.0),
               Row(
                 children: [
                   Expanded(
@@ -347,7 +347,7 @@ class _LoginPageState extends State<LoginPage> {
                 ],
               ),
               const SizedBox(
-                height: 25.0,
+                height: 18.0,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -367,7 +367,7 @@ class _LoginPageState extends State<LoginPage> {
                 ],
               ),
               const SizedBox(
-                height: 25.0,
+                height: 18.0,
               ),
               //don't have an account
                 Row(
