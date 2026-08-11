@@ -62,6 +62,7 @@ class _SignUpPageState extends State<SignUpPage> {
               height: 10,
             ),
           ),
+
           Expanded(
             flex: 7,
             child: Container(

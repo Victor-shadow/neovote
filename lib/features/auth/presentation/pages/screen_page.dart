@@ -4,8 +4,6 @@ import 'package:neovote/features/auth/presentation/pages/signup_page.dart';
 import 'package:neovote/features/auth/presentation/theme/theme.dart';
 import 'custom_scaffold.dart';
 import '../widgets/screen_button.dart';
-
-
 class ScreenPage extends StatelessWidget{
   const ScreenPage({super.key});
 
