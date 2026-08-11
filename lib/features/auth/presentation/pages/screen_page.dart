@@ -49,20 +49,20 @@ class ScreenPage extends StatelessWidget{
               alignment: Alignment.bottomRight,
               child: Row(
                 children: [
-                  Expanded(
+                  const Expanded(
                     child: ScreenButton(
                       buttonText: 'Log In',
-                      onTap: const LoginPage(),
-                      color: Colors.white,
-                      textColor: const Color(0xFF416FDF)
+                      onTap: LoginPage(),
+                      color: Colors.transparent,
+                      textColor: Colors.white,
                     ),
                     ),
                   Expanded(
                     child: ScreenButton(
                       buttonText: 'Sign up',
                       onTap: const SignUpPage(),
-                      color: lightColorScheme.primary,
-                      textColor: Colors.white,
+                      color: Colors.white,
+                      textColor: lightColorScheme.primary,
                     ),
                     ),
                  ],

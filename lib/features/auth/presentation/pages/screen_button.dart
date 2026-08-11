@@ -22,7 +22,7 @@ Widget build(BuildContext context){
           );
     },
   child: Container(
-    padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 24.0),
+    padding: const EdgeInsets.all(30.0),
     decoration: BoxDecoration(
       color: color!,
       borderRadius: const BorderRadius.only(
