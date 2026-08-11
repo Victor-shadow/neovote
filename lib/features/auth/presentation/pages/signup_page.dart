@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:neovote/features/auth/presentation/theme/theme.dart';
 import 'custom_scaffold.dart';
+import 'login_page.dart';
 
 class SignUpPage  extends StatefulWidget{
   const SignUpPage({super.key});
@@ -33,6 +34,7 @@ class _SignUpPageState extends State<SignUpPage> {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Account created successfully')),
       );
+      Navigator.pop(context);
     } on FirebaseAuthException catch(e){
       if(!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
@@ -63,8 +65,9 @@ class _SignUpPageState extends State<SignUpPage> {
           Expanded(
             flex: 7,
             child: Container(
+              padding: const EdgeInsets.fromLTRB(25.0, 40.0, 25.0, 20.0),
               decoration: const BoxDecoration(
-                color: Colors.white,
+                color: Colors.blueGrey,
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(40.0),
                   topRight: Radius.circular(40.0)
@@ -74,10 +77,11 @@ class _SignUpPageState extends State<SignUpPage> {
               child: Form(
                 key: _formSignUpKey,
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     Text(
                    'Join NeoVote',
+                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 30.0,
                      fontWeight: FontWeight.w900,
@@ -86,7 +90,6 @@ class _SignUpPageState extends State<SignUpPage> {
                 ),
                 const SizedBox(
                   height: 40.0,
-                  width: double.infinity,
                   ),
                 TextFormField(
                   controller: _nameController,
@@ -97,7 +100,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     return null;
                   },
                   decoration: InputDecoration(
-                    label: const Text('Name'),
+                    labelText: 'Name',
                     hintText: 'Enter Full Name',
                     hintStyle: const TextStyle(
                       color: Colors.black26,
@@ -118,7 +121,6 @@ class _SignUpPageState extends State<SignUpPage> {
                 ),
                 const SizedBox(
                   height: 25.0,
-                  width: double.infinity,
                 ), 
                 TextFormField(
                   controller: _emailController,
@@ -130,7 +132,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     return null;
                   },
                   decoration: InputDecoration(
-                    label: const Text('Email'),
+                    labelText: 'Email',
                     hintText: 'Enter your Email',
                     hintStyle: const TextStyle(
                       color: Colors.black26,
@@ -152,7 +154,6 @@ class _SignUpPageState extends State<SignUpPage> {
 
                 const SizedBox(
                   height: 25.0,
-                  width: double.infinity,
                 ),
 
                 TextFormField(
@@ -166,7 +167,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     return null;
                   },
                   decoration: InputDecoration(
-                    label: const Text('Password'),
+                    labelText: 'Password',
                     hintText: 'Enter Password',
                     hintStyle: const TextStyle(
                       color: Colors.black26,
@@ -192,6 +193,38 @@ class _SignUpPageState extends State<SignUpPage> {
                   onPressed: _signUpWithEmail,
                   child: const Text('Sign up'),
                   ),
+                  const SizedBox(
+                    height: 25.0,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Text(
+                        'Already have an account? ',
+                        style: TextStyle(
+                          color: Colors.black45,
+                        ),
+                      ),
+                      GestureDetector(
+                        onTap: (){
+                          Navigator.pushReplacement(
+                            context,
+                             MaterialPageRoute(
+                              builder: (context) => const LoginPage(),
+                              ),
+                              );
+                        },
+                        child: Text(
+                          'Login',
+                          style: TextStyle(
+                            color: lightColorScheme.primary,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      )
+                    ],
+                  )
+
                   ],
                 ),
                 )

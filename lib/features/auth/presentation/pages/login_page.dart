@@ -5,6 +5,7 @@ import 'package:local_auth/local_auth.dart';
 import 'package:local_auth_android/local_auth_android.dart';
 import 'package:neovote/features/auth/presentation/theme/theme.dart';
 import 'signup_page.dart';
+import 'forgot_password.dart';
 import 'custom_scaffold.dart';
 import 'package:iconsx_plus/iconsx_plus.dart';
  
@@ -40,7 +41,29 @@ class _LoginPageState extends State<LoginPage> {
       debugPrint('Error initializing Google Sign-In: $e');
     }
   }
-  
+
+  Future<void>_signInWithGithub() async {
+    try{
+      debugPrint('Starting Github Sign-In flow...');
+      final githubProvider = GithubAuthProvider();
+
+      await _auth.signInWithProvider(githubProvider);
+      debugPrint('Firebase sign-in with Github successful...');
+      if(!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Signed in with Github...')),
+      );
+    } catch(e){
+      final errorMessage = e.toString().toLowerCase();
+      if(errorMessage.contains('cancel')|| errorMessage.contains('aborted')){
+        return;
+      }
+      if(!mounted)return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Github Sign-In failed: $e')),
+      );
+    }
+  }
 
   Future<void> _signInWithEmail() async {
     if(!_formLoginKey.currentState!.validate()) return;
@@ -90,6 +113,8 @@ class _LoginPageState extends State<LoginPage> {
       );
     }
   }
+
+
 
   Future<void>_signInWithBiometrics() async {
     try {
@@ -152,9 +177,9 @@ class _LoginPageState extends State<LoginPage> {
           Expanded(
             flex: 7,
             child: Container(
-              padding: const EdgeInsets.fromLTRB(25.0, 50.0, 25.0, 20.0),
+              padding: const EdgeInsets.fromLTRB(25.0, 40.0, 25.0, 20.0),
               decoration: const BoxDecoration(
-                color: Colors.white,
+                color: Colors.blueGrey,
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(40.0),
                   topRight: Radius.circular(40.0),
@@ -164,18 +189,19 @@ class _LoginPageState extends State<LoginPage> {
              child: Form(
              key: _formLoginKey,
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Text(
                   'Log in to Vote',
+                  textAlign: TextAlign.center,
                   style: TextStyle(
-                    fontSize: 30.0,
+                    fontSize: 28.0,
                     fontWeight:FontWeight.w900,
                     color: lightColorScheme.primary,
                     ),
                 ),
                 const SizedBox(
-                  height: 40.0
+                  height: 30.0
                   ),
 
                 TextFormField(
@@ -209,7 +235,7 @@ class _LoginPageState extends State<LoginPage> {
                 ),
 
                 const SizedBox(
-                  height: 25.0,
+                  height: 20.0,
                   ),
                 TextFormField(
                   controller: _passwordController,
@@ -222,7 +248,7 @@ class _LoginPageState extends State<LoginPage> {
                     return null;
                   },
                   decoration: InputDecoration(
-                    label: const Text('Password'),
+                    labelText: 'Password',
                     hintText: 'Enter Password',
                     hintStyle: const TextStyle(
                       color: Colors.black26,
@@ -241,14 +267,7 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ),
                 ),
-
-                const SizedBox(
-                  height: 25.0,
-                  ),
-               ElevatedButton(
-                  onPressed: _signInWithEmail,
-                  child: const Text('Login'),
-                ),
+                const SizedBox(height: 15.0),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -272,21 +291,34 @@ class _LoginPageState extends State<LoginPage> {
                   ],
                   ),
                   GestureDetector(
+                    onTap: (){
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const ForgotPasswordScreen(),
+                          ),
+                        );
+                    },
                     child: Text(
                       'Forgot password?',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         color: lightColorScheme.primary,
-                      ),
+                          ),
+                        ),
                     ),
-                  ),
                 ],
               ), 
+
               const SizedBox(
-                height: 25.0,
+                height: 20.0,
               ),
+              ElevatedButton(
+                onPressed: _signInWithEmail,
+                 child: const Text('Login'),
+                 ),
+              const SizedBox(height: 25.0),   
               Row(
-                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Expanded(
                     child: Divider(
@@ -294,9 +326,9 @@ class _LoginPageState extends State<LoginPage> {
                       color: Colors.grey.withValues(alpha: 0.5),
                     ),
                   ),
+
                   const Padding(
                     padding: EdgeInsets.symmetric(
-                      vertical: 0, 
                       horizontal: 10,
                   ),
                   child: Text (
@@ -323,6 +355,10 @@ class _LoginPageState extends State<LoginPage> {
                   GestureDetector(
                     onTap: _signInWithGoogle,
                     child: Brand(Brands.google),
+                  ),
+                  GestureDetector(
+                    onTap: _signInWithGithub,
+                    child: Brand(Brands.github),
                   ),
                   GestureDetector(
                     onTap: _signInWithBiometrics,
