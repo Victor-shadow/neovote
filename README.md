@@ -1,175 +1,240 @@
-# NeoVote Flutter Mobile Application
+# NeoVote: Enterprise Decentralized Voting Platform (Mobile App)
 
-## Project Purpose
+## 1. Executive Summary & Architectural Overview
+**NeoVote** is a mission-critical, enterprise-grade decentralized voting ecosystem designed to eliminate electoral fraud, guarantee absolute voter anonymity, and maximize democratic participation across universities, non-governmental organizations (NGOs), corporate shareholder boards, and governmental bodies.
 
-NeoVote is a secure, modern, mobile-first voting platform for institutions, universities, NGOs, and organizations that need transparent and verifiable digital elections. The Flutter app should deliver a trusted voter experience with secure login, election browsing, ballot casting, real-time notifications, and secure payment handling for service access.
+The platform marries the **Solana High-Throughput Proof-of-History (PoH) Blockchain** with a **Cross-Platform Flutter Client (iOS & Android)**, backed by a **High-Performance Rust/Actix-Web Relayer Service** and a **React/Next.js Institutional Admin Dashboard**.
 
-The application must be built with strong mobile UI/UX principles, clean architecture, and professional Flutter coding standards. The goal is to provide a product that feels trustworthy, simple, fast, and secure from first launch to final vote confirmation.
-
-## What the Flutter Project Should Implement
-
-The mobile application should include:
-
-- Secure authentication with Firebase Authentication
-- Google sign-in and biometric login
-- Election discovery and ballot participation
-- Secure vote submission flow
-- Real-time notifications and reminders
-- Multi-language support
-- Offline-safe behavior where possible
-- Payment integration support for Stripe and M-Pesa
-- Accessibility, localization, and responsive mobile UI
-- Strong security, modular architecture, and reusable widgets
-
-## Recommended Development Principles
-
-Follow these practices throughout the project:
-
-- Use clean architecture with feature-first folders
-- Keep business logic separate from UI logic
-- Use dependency injection or service classes for backend access
-- Prefer immutable state and typed models
-- Use null safety and avoid dynamic where possible
-- Keep widgets small, focused, and reusable
-- Use constants for colors, spacing, typography, and strings
-- Write readable code with clear naming and short functions
-- Handle errors with custom exceptions and user-friendly messages
-- Add tests for core logic and critical flows
-
-## Best Coding Practices for This Project
-
-1. Folder-by-feature structure
-   - Group related screens, providers, services, and models together
-2. Clear separation of concerns
-   - UI, state, domain logic, and infrastructure each should have a distinct role
-3. Reusable UI components
-   - Buttons, input fields, cards, dialogs, loaders, and headers must be shared widgets
-4. Consistent naming
-   - Use descriptive names like `LoginPage`, `ElectionCard`, `AuthRepository`
-5. Safe and predictable state handling
-   - Avoid mixing UI rendering and network logic in the same widget
-6. Performance awareness
-   - Avoid unnecessary rebuilds, use `const` constructors, and keep lists efficient
-7. Security-first implementation
-   - Never store sensitive auth data insecurely
-8. Accessibility support
-   - Add semantic labels, sufficient contrast, and readable text sizes
-
-## UI/UX Design Principles to Follow
-
-The UI and UX must be guided by the following principles:
-
-- Clarity: users should understand the next step immediately
-- Consistency: spacing, colors, typography, and component behavior should remain uniform
-- Feedback: every action should show progress, success, or error feedback
-- Simplicity: reduce cognitive load and avoid clutter
-- Trust: the design must feel secure, calm, and professional
-- Accessibility: support larger text, screen readers, and contrast-aware design
-- Responsiveness: the app should feel correct on phones of different sizes
-- Familiarity: use common mobile patterns such as bottom sheets, cards, progress indicators, and clear forms
-
-## UI/UX Design Guidance for the App
-
-Use these design foundations:
-
-- Use a calm, modern color system with strong contrast
-- Apply consistent spacing scale such as 8, 12, 16, 24, 32
-- Keep primary actions visible and clearly labeled
-- Use cards for elections, actions, and summaries
-- Implement skeleton loaders for network operations
-- Provide empty states and error states for all meaningful screens
-- Use sticky headers and clear navigation for large form flows
-- Prefer biometrics and one-tap actions where security allows
-
-## Widget Design Knowledge Required
-
-To implement the app properly, the developer should understand these Flutter widget concepts:
-
-- `StatelessWidget` and `StatefulWidget`
-- `MaterialApp`, `ThemeData`, and `ColorScheme`
-- `Scaffold`, `AppBar`, `BottomNavigationBar`, `Drawer`
-- `TextFormField`, `ElevatedButton`, `OutlinedButton`, `TextButton`
-- `ListView`, `GridView`, `PageView`
-- `Container`, `Padding`, `SizedBox`, `Expanded`, `Spacer`
-- `AlertDialog`, `SnackBar`, `BottomSheet`
-- `FutureBuilder`, `StreamBuilder`, `AnimatedSwitcher`
-- `CustomScrollView`, `SliverAppBar`, `SliverList`
-- `Form`, `GlobalKey<FormState>`
-- `AnimatedContainer`, `Hero`, `Opacity`, `ClipRRect`
-
-Developers should also understand responsive UI patterns, theming, screen sizes, and platform-specific design behavior for Android and iOS.
-
-## Project Architecture and File Structure
-
-The project follows a modular, feature-first Clean Architecture. This ensures that the code is scalable, testable, and maintainable.
-
-### Root Files
-- [main.dart](file:///C:/Users/student/StudioProjects/neovote/lib/main.dart) - Application entry point, service initialization, and root widget.
-- [firebase_options.dart](file:///C:/Users/student/StudioProjects/neovote/lib/firebase_options.dart) - Firebase configuration for multiple platforms.
-
-### Core Module (`lib/core/`)
-Contains shared logic, widgets, and infrastructure services.
-
-- **Data Services**: [offline_service.dart](file:///C:/Users/student/StudioProjects/neovote/lib/core/data/services/offline_service.dart) - Handles local caching and offline behavior.
-- **Errors**: [app_exception.dart](file:///C:/Users/student/StudioProjects/neovote/lib/core/errors/app_exception.dart), [failure.dart](file:///C:/Users/student/StudioProjects/neovote/lib/core/errors/failure.dart), [error_handler.dart](file:///C:/Users/student/StudioProjects/neovote/lib/core/errors/error_handler.dart).
-- **Network**: [api_client.dart](file:///C:/Users/student/StudioProjects/neovote/lib/core/network/api_client.dart), [network_info.dart](file:///C:/Users/student/StudioProjects/neovote/lib/core/network/network_info.dart).
-- **Presentation**: [neovote_button.dart](file:///C:/Users/student/StudioProjects/neovote/lib/core/presentation/widgets/neovote_button.dart) - Primary reusable button component.
-- **Storage**: [secure_storage_service.dart](file:///C:/Users/student/StudioProjects/neovote/lib/core/storage/secure_storage_service.dart), [local_storage_service.dart](file:///C:/Users/student/StudioProjects/neovote/lib/core/storage/local_storage_service.dart), [database_service.dart](file:///C:/Users/student/StudioProjects/neovote/lib/core/storage/database_service.dart).
-- **Utils**: [validators.dart](file:///C:/Users/student/StudioProjects/neovote/lib/core/utils/validators.dart), [logger.dart](file:///C:/Users/student/StudioProjects/neovote/lib/core/utils/logger.dart), [formatters.dart](file:///C:/Users/student/StudioProjects/neovote/lib/core/utils/formatters.dart).
-
-### Features Module (`lib/features/`)
-Each feature is encapsulated with its own data, presentation, and logic layers.
-
-#### Authentication (`auth`)
-- **Pages**: [login_page.dart](file:///C:/Users/student/StudioProjects/neovote/lib/features/auth/presentation/pages/login_page.dart), [signup_page.dart](file:///C:/Users/student/StudioProjects/neovote/lib/features/auth/presentation/pages/signup_page.dart).
-- **Widgets**: [auth_header.dart](file:///C:/Users/student/StudioProjects/neovote/lib/features/auth/presentation/widgets/auth_header.dart), [social_login_button.dart](file:///C:/Users/student/StudioProjects/neovote/lib/features/auth/presentation/widgets/social_login_button.dart).
-- **Logic**: [auth_repository.dart](file:///C:/Users/student/StudioProjects/neovote/lib/features/auth/data/repositories/auth_repository.dart), [auth_provider.dart](file:///C:/Users/student/StudioProjects/neovote/lib/features/auth/providers/auth_provider.dart).
-
-#### Elections (`elections`)
-- **Pages**: [election_list_page.dart](file:///C:/Users/student/StudioProjects/neovote/lib/features/elections/presentation/pages/election_list_page.dart), [election_detail_page.dart](file:///C:/Users/student/StudioProjects/neovote/lib/features/elections/presentation/pages/election_detail_page.dart).
-- **Data**: [election_model.dart](file:///C:/Users/student/StudioProjects/neovote/lib/features/elections/data/models/election_model.dart), [election_repository.dart](file:///C:/Users/student/StudioProjects/neovote/lib/features/elections/data/repositories/election_repository.dart).
-
-#### Payments (`payments`)
-- **Services**: [payment_service.dart](file:///C:/Users/student/StudioProjects/neovote/lib/features/payments/data/services/payment_service.dart) - Integration for Stripe and M-Pesa.
-
-#### Voting (`voting`)
-- **Pages**: [voting_page.dart](file:///C:/Users/student/StudioProjects/neovote/lib/features/voting/presentation/pages/voting_page.dart), [vote_confirmation.dart](file:///C:/Users/student/StudioProjects/neovote/lib/features/voting/presentation/pages/vote_confirmation.dart).
-- **Data**: [ballot_model.dart](file:///C:/Users/student/StudioProjects/neovote/lib/features/voting/data/models/ballot_model.dart), [voting_repository.dart](file:///C:/Users/student/StudioProjects/neovote/lib/features/voting/data/repositories/voting_repository.dart).
-
-#### Notifications (`notifications`)
-- **Data**: [notification_model.dart](file:///C:/Users/student/StudioProjects/neovote/lib/features/notifications/data/models/notification_model.dart), [notification_repository.dart](file:///C:/Users/student/StudioProjects/neovote/lib/features/notifications/data/repositories/notification_repository.dart).
-- **UI**: [notifications_page.dart](file:///C:/Users/student/StudioProjects/neovote/lib/features/notifications/presentation/pages/notifications_page.dart).
-
-## Payment Integration Details
-
-### Stripe
-The application uses `flutter_stripe` for secure card processing. Initialization occurs in `main.dart` and the logic is encapsulated in `PaymentService`.
-
-### M-Pesa
-M-Pesa integration is handled via STK Push (Lipa na M-Pesa Online). The `PaymentService` manages the authentication and request dispatch to the Safaricom API using the provided consumer keys.
-
-## Multi-language Support
-Localized strings are supported for:
-- **English (en)**
-- **Swahili (sw)**
-
-Configured in `MaterialApp` via `localizationsDelegates` and `supportedLocales`.
-
-## Recommended Dependencies
-
-Add the following packages as the app grows:
-
-```yaml
-dependencies:
-  firebase_core: latest
-  firebase_auth: latest
-  google_sign_in: latest
-  local_auth: latest
-  http: latest
-  shared_preferences: latest
-  flutter_localizations: latest
+```
++-----------------------------------------------------------------------------------+
+|                                 NEOVOTE ECOSYSTEM                                 |
++-----------------------------------------------------------------------------------+
+|                                                                                   |
+|   +--------------------------+                 +------------------------------+   |
+|   |   Voter Mobile App       |                 |   Admin Dashboard            |   |
+|   |   (Flutter - iOS/Android)|                 |   (React / Next.js Web)      |   |
+|   +------------+-------------+                 +--------------+---------------+   |
+|                |                                              |                   |
+|   HTTPS/gRPC   | (Biometrics, JWT, Encrypted Ballots)         | (RBAC, Audit)     |
+|                v                                              v                   |
+|   +---------------------------------------------------------------------------+   |
+|   |                       Rust Actix-Web Relayer & API Gate                   |   |
+|   |  - Token Verification (Firebase/JWT)     - Daraja M-Pesa & Stripe Gateway |   |
+|   |  - Zero-Knowledge Nullifier Verification - Redis Queue & Idempotency      |   |
+|   |  - Fee-Payer Gasless Transaction Relayer - PostgreSQL State & Audit Log   |   |
+|   +-------------------------------------+-------------------------------------+   |
+|                                         |                                         |
+|                               RPC Calls | (Anchor Program Dispatch)               |
+|                                         v                                         |
+|   +---------------------------------------------------------------------------+   |
+|   |                     Solana Blockchain (Proof-of-History)                  |   |
+|   |  - `neovote_program` Smart Contracts (Anchor Framework)                   |   |
+|   |  - Immutable Election, Ballot, Option & Nullifier PDAs                    |   |
+|   |  - Verifiable Cryptographic Vote Receipts & Mathematical Overflow Checks  |   |
+|   +---------------------------------------------------------------------------+   |
++-----------------------------------------------------------------------------------+
 ```
 
-## Final Implementation Notes
+---
 
-This project should be treated as a trust-focused, security-first mobile product. The design must feel simple, premium, and calm while still providing strong confidence in the voting process. Every screen should support clear user guidance, safe actions, and error prevention. The codebase should stay modular, scalable, and maintainable from the first release onward.
+## 2. Business Plan Roadmap & Phase Breakdown
+
+### Phase 1: The Foundation (Months 0–3)
+- **Core Security & Cryptography**: Implementation of hardware-backed biometric authentication via LocalAuth, AES-256-GCM voter PII encryption, and Solana Anchor smart contracts.
+- **Relayer Architecture**: Stateless Rust relayer paying gas fees so voters do not need native SOL balances.
+- **Pilot Deployments**: Pilot voting trials across 3 contracted university student unions (East Africa & Europe).
+- **Compliance Baseline**: Decoupling voter identity from ballot selections to guarantee GDPR/Data Protection Act adherence.
+
+### Phase 2: Validation & UX Modernization (Months 4–6)
+- **Turnout Telemetry**: Real-time admin analytics dashboard displaying turnout velocity, voter demographics, and anomaly alerts.
+- **Localization (i18n)**: Native multi-language support for English (EN), Swahili (SW), and Kinyarwanda (RW).
+- **Scale Validation**: 5+ large-scale institutional elections handling 50,000+ concurrent voters with sub-second finality.
+
+### Phase 3: Institutional Expansion (Months 7–12)
+- **Complex Ballot Modules**: Ranked-choice (Instant Runoff Voting - IRV), quadratic voting, and weighted shareholder voting.
+- **Offline "Queue & Sync" Engine**: SQLite-backed local encrypted queue with nonce collision prevention for low-connectivity zones.
+- **Enterprise Integrations**: Active Directory / LDAP / University Student Information System (SIS) roster synchronizers.
+- **NGO & County Pilots**: Deployments with international NGOs (e.g., Doctors Without Borders) and Kenyan county governments.
+
+### Phase 4: Enterprise Scale & Sovereign Governance (Year 2+)
+- **Zero-Knowledge Proofs (ZKP)**: Complete Groth16/Plonk ZK-SNARK circuit integration for end-to-end mathematical ballot secrecy and tally verifiability.
+- **Hardware Security Modules (HSM)**: AWS CloudHSM / Azure Key Vault key custody for all administrative transaction signers.
+- **ISO 27001 & SOC 2 Type II**: Full security certification, penetration testing, and forensic audit trail export.
+- **Pan-African & Global Expansion**: Rollouts across Tanzania, Uganda, Rwanda, Nigeria, and North American institutions.
+
+---
+
+## 3. Flutter Application Architecture (Comprehensive)
+
+The mobile client is engineered using **Feature-First Clean Architecture**, separating business logic, state management, data repositories, and UI presentations.
+
+```
+lib/
+|-- app/
+|   |-- config/
+|   |   |-- app_constants.dart          # Environment variables, cluster endpoints, API URLs
+|   |   |-- app_localizations.dart      # Translation engine (English, Swahili, Kinyarwanda)
+|   |   |-- app_router.dart             # Declarative route guards, deep link handlers
+|   |   `-- app_theme.dart              # Material 3 dark/light palettes, typography, glassmorphism
+|   `-- observers/
+|       |-- app_observer.dart           # App lifecycle monitor (auto-logout on backgrounding)
+|       `-- navigation_observer.dart    # Telemetry and funnel analytics tracking
+|-- core/
+|   |-- data/
+|   |   `-- services/
+|   |       `-- offline_service.dart    # SQLite-backed offline encrypted vote queue & background sync
+|   |-- errors/
+|   |   |-- app_exception.dart          # Base domain exceptions (Network, Auth, Crypto, Solana)
+|   |   |-- error_handler.dart          # Global crashlytics and exception catcher
+|   |   `-- failure.dart                # User-facing failure representations
+|   |-- network/
+|   |   |-- api_client.dart             # HTTP/Dio client with JWT interceptors, auto-retry, backoff
+|   |   |-- api_exception.dart          # REST & Solana RPC error response deserializer
+|   |   `-- network_info.dart           # Connectivity listener for auto-switching offline mode
+|   |-- presentation/
+|   |   `-- widgets/
+|   |       |-- neovote_button.dart     # Primary design system button with haptic feedback
+|   |       |-- custom_text_field.dart  # Form fields with animated validation states
+|   |       |-- loading_overlay.dart    # Glassmorphism loading barrier
+|   |       `-- glass_card.dart         # Frosted glass card with dynamic gradient borders
+|   |-- storage/
+|   |   |-- database_service.dart       # SQLite local database instance for election caching
+|   |   |-- local_storage_service.dart  # Shared preferences for non-sensitive UI settings
+|   |   `-- secure_storage_service.dart # Android Keystore / iOS Keychain for private keys & JWTs
+|   `-- utils/
+|       |-- crypto_utils.dart           # SHA-256, HMAC, and Ed25519 signing helpers
+|       |-- data_formatter.dart         # Blockchain signature and address truncator
+|       |-- formatters.dart             # Currency, timestamp, and number formatters
+|       |-- logger.dart                 # Production-stripped debug logger
+|       `-- validators.dart             # National ID, student email, and password regex rules
+|-- features/
+|   |-- auth/
+|   |   |-- data/
+|   |   |   |-- models/user_model.dart             # Voter identity, verification level, org affiliation
+|   |   |   `-- repositories/auth_repository.dart  # Firebase, Google, GitHub, Biometric auth flows
+|   |   |-- presentation/
+|   |   |   |-- pages/
+|   |   |   |   |-- custom_scaffold.dart           # Shared branded scaffold with background assets
+|   |   |   |   |-- forgot_password.dart           # Password reset flow
+|   |   |   |   |-- login_page.dart                # Multi-modal login (Email, Google, GitHub, Biometrics)
+|   |   |   |   |-- screen_page.dart               # Onboarding landing page
+|   |   |   |   `-- signup_page.dart               # Voter enrollment & registration
+|   |   |   |-- theme/theme.dart                   # Auth-specific color schemes & styles
+|   |   |   `-- widgets/
+|   |   |       |-- auth_header.dart               # Branded top banner
+|   |   |       `-- screen_button.dart             # Rounded onboarding action button
+|   |   `-- providers/auth_provider.dart           # ChangeNotifier managing auth states & sessions
+|   |-- elections/
+|   |   |-- data/
+|   |   |   |-- models/election_model.dart         # Ballot schema, candidate profiles, timelines
+|   |   |   `-- repositories/election_repository.dart # Backend election discovery & cached metadata
+|   |   |-- presentation/
+|   |   |   |-- pages/
+|   |   |   |   |-- election_detail_page.dart      # Candidate manifestos, rules, voting window
+|   |   |   |   |-- election_list_page.dart        # Filtered active/upcoming/closed feeds
+|   |   |   |   `-- elections_page.dart            # Main election discovery dashboard
+|   |   |   `-- widgets/election_card.dart         # Interactive election countdown & status card
+|   |   `-- providers/election_provider.dart       # State management for election catalog
+|   |-- voting/
+|   |   |-- data/
+|   |   |   |-- models/ballot_model.dart           # Solana payload, selections, nullifier hash
+|   |   |   `-- repositories/voting_repository.dart# Relayer preparation, signature, and submission
+|   |   |-- presentation/
+|   |   |   |-- pages/
+|   |   |   |   |-- voting_page.dart               # Interactive ballot casting (Single/Ranked/Approval)
+|   |   |   |   `-- vote_confirmation.dart         # Cryptographic receipt, QR verification, Tx ID
+|   |   |   `-- widgets/vote_option_tile.dart      # Candidate selector with animated selection state
+|   |   `-- providers/voting_provider.dart         # State manager for ballot drafting & submission
+|   |-- notifications/
+|   |   |-- data/
+|   |   |   |-- models/notification_model.dart     # Push notification payload structure
+|   |   |   |-- repositories/notification_repository.dart # Notification history fetcher
+|   |   |   `-- services/fcm_service.dart          # Firebase Cloud Messaging background handler
+|   |   `-- presentation/
+|   |       |-- pages/notifications_page.dart      # Notification feed & alerts inbox
+|   |       `-- widgets/notification_tile.dart     # Dismissible notification list tile
+|   `-- payments/
+|       |-- data/
+|       |   |-- models/payment_model.dart          # STK push / Stripe charge model
+|       |   `-- services/payment_service.dart      # M-Pesa Daraja STK Push & Stripe checkout client
+|       `-- presentation/pages/payment_page.dart   # Institution fee settlement page
+|-- firebase_options.dart                          # Firebase configuration for multi-platform
+`-- main.dart                                      # Application entry point with DI initialization
+```
+
+---
+
+## 4. End-to-End Voter Flow & Verification Lifecycle
+
+1. **Onboarding & Authentication**:
+   - Voter launches app -> passes biometric check (Touch ID / Face ID / Android BiometricPrompt).
+   - Secure token exchange: Firebase ID Token is exchanged with the NeoVote Rust backend for a scoped Session JWT.
+2. **Election Discovery**:
+   - `election_repository.dart` requests eligible elections for the authenticated voter's organization.
+   - Metadata is cached in local SQLite via `database_service.dart` for instant offline accessibility.
+3. **Ballot Preparation & Cryptographic Anonymization**:
+   - Voter selects candidates on `voting_page.dart`.
+   - The app derives a deterministic **Voter Nullifier Hash**:
+     $$\text{Nullifier} = \text{HMAC-SHA256}(\text{VoterPrivateKey}, \text{ElectionID})$$
+   - This ensures **1 Person = 1 Vote** without linking the voter's public key or PII to the ballot on-chain.
+4. **Gasless Blockchain Relaying**:
+   - The app prepares a `VotePreparationPayload` and sends it to the Rust Relayer `/v1/votes/prepare`.
+   - The Rust Relayer acts as the fee-payer, signs the outer transaction, and submits it to the Solana cluster.
+5. **Instant Receipt Generation**:
+   - Solana records the vote and returns the Transaction Signature.
+   - The app displays `vote_confirmation.dart` containing a verifiable QR code, block number, and nullifier receipt.
+
+---
+
+## 5. Requirement Traceability Matrix
+
+| Business / Security Requirement | Architecture Component | Implementation File(s) |
+| :--- | :--- | :--- |
+| **Solana Immutability** | Anchor Smart Contract | `voting_repository.dart`, `ballot_model.dart`, `neovote_program` |
+| **Secret Ballot / Anonymity** | Cryptographic Nullifier & Relayer | `crypto_utils.dart`, `secure_storage_service.dart`, `voting_repository.dart` |
+| **Biometric & Social Auth** | LocalAuth + Firebase | `login_page.dart`, `auth_repository.dart`, `auth_provider.dart` |
+| **Offline "Queue & Sync"** | SQLite + Background Sync Engine | `offline_service.dart`, `database_service.dart`, `network_info.dart` |
+| **M-Pesa STK Push Payment** | Safaricom Daraja API | `payment_service.dart`, `payment_model.dart` |
+| **Multi-Language Support** | Flutter Localizations (i18n) | `app_localizations.dart`, ARB translation files |
+| **Secure Key Storage** | Android Keystore / iOS Keychain | `secure_storage_service.dart` |
+| **Forensic Crash Tracking** | Error Management & Sentry | `error_handler.dart`, `app_exception.dart`, `failure.dart` |
+
+---
+
+## 6. Setup & Installation Guide
+
+### Prerequisites
+- Flutter SDK (>= 3.12.2)
+- Dart SDK (>= 3.3.0)
+- Android Studio / Xcode with CocoaPods
+- Firebase Project with Auth and Cloud Messaging enabled
+- Local or Devnet Solana RPC node
+
+### Commands
+```bash
+# 1. Clone repository
+git clone https://github.com/Victor-shadow/neovote.git
+cd neovote
+
+# 2. Install Flutter dependencies
+flutter pub get
+
+# 3. Configure Firebase (if regenerating config)
+flutterfire configure
+
+# 4. Run Static Analysis & Lint Checks
+flutter analyze
+
+# 5. Run Unit & Widget Tests
+flutter test
+
+# 6. Launch Debug Build on Connected Device
+flutter run
+```
+
+---
+
+## 7. Developer & Security Guidelines
+1. **Never Log Sensitive PII or Private Keys**: All logging through `logger.dart` is automatically disabled in `kReleaseMode`.
+2. **Always Use Cryptographic Nullifiers**: Do not transmit raw voter public keys or student IDs to smart contracts.
+3. **Handle Offline Errors Gracefully**: Check `network_info.dart` before initiating network requests; fallback to `offline_service.dart` when disconnected.
